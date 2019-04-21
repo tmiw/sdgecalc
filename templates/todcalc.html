@@ -1,0 +1,49 @@
+{% load humanize %}
+{% if form.is_valid %}
+
+Results:
+
+<table>
+<tr>
+    <th>&nbsp;</th>
+    {% for k, v in result.iteritems %}
+        <th>{{ v.date_str }}</th>
+    {% endfor %}
+    <th>Total</th>
+</tr>
+<tr>
+    <th>Switch to TOD + usage change:</th>
+    {% for k, v in result.iteritems %}
+        <td>${{ v.cost|floatformat:"2"|intcomma }}</th>
+    {% endfor %}
+    <td>${{ sum_result|floatformat:"2"|intcomma }}</th>
+</tr>
+<tr>
+    <th>No changes made:</th>
+    {% for k, v in result_no_chg.iteritems %}
+        <td>${{ v.cost|floatformat:"2"|intcomma }}</th>
+    {% endfor %}
+    <td>${{ sum_result_no_chg|floatformat:"2"|intcomma }}</th>
+</tr>
+</table>
+
+<hr noshade/>
+
+{% endif %}
+
+<form action="/todcalc/" enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+
+    {% if form.subject.errors %}
+    <ol>
+    {% for error in form.subject.errors %}
+        <li><strong>{{ error|escape }}</strong></li>
+    {% endfor %}
+    </ol>
+    {% endif %}
+
+    <table>
+    {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit" />
+</form>
