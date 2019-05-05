@@ -1,7 +1,72 @@
 {% load humanize %}
+<html>
+<head>
+<title>Time of Day Cost Calculator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style type="text/css">
+ul#id_tod_plan { 
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+ul#id_percentage_change_relative_to { 
+    list-style-type: none; 
+    padding: 0;
+    margin: 0;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Time of Day Cost Calculator</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+<p>This tool allows you to determine whether you can save money on your
+electric bills by allowing SDG&amp;E to switch your electricity plan to one of
+the <a href="https://www.sdge.com/whenmatters" target="_blank">Time of Use
+plans</a>. In order to do this, it relies on the electricity usage
+data downloaded from the SDG&amp;E website, which you can do by performing the
+following:</p>
+
+<ol>
+<li>Log into <a href="https://myaccount.sdge.com" target="_blank">My Account</a></li>
+<li>Select My Energy from the top and then select My Energy Overview.</li>
+<li>Select My Energy Use.</li>
+<li>Select Green Button Download My Data</li>
+<li>Select Electric (vs. Gas if listed for your household)</li>
+<li>Select the desired date range (maximum 13 months)</li>
+<li>Select Export</li>
+</ol>
+
+<p>To use this tool, simply fill in all of the fields below, select the XML file
+inside the ZIP file that you downloaded with the above steps and push
+Submit. Note that you can find your baseline from your recent SDG&amp;E bill
+or by using the calculator <a
+href="https://www.sdge.com/baseline-allowance-calculator"
+target="_blank">here</a>. Positive values for percentages correspond to
+decreases in usage, while negative values correspond to increases.</p>
+
+<p>Privacy policy: this tool keeps the uploaded electricity usage in the
+server's memory for only as long as required to perform the computations and
+then immediately forgets this data. None of your personal information is saved as
+a result of usage of this tool (other than IP address/browser information for
+the purpose of server logging). The source code of this tool is available <a
+href="https://github.com/tmiw/sdgecalc" target="_blank">here</a> for those who
+wish to double-check the previous.</p>
+<hr noshade/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
 {% if form.is_valid %}
 
-Results:
+<h3>Results:</h3>
 
 <table>
 <tr>
@@ -47,3 +112,15 @@ Results:
     </table>
     <input type="submit" value="Submit" />
 </form>
+<hr noshade/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      Copyright &copy; 2019 Mooneer Salem. All rights reserved. SDG&amp;E and
+other trademarks are the property of their respective owners.
+    </div>
+  </div>
+</div>
+</body>
+</html>
