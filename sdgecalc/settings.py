@@ -25,7 +25,7 @@ SECRET_KEY = 'm_%pv)8g998a0w6-9kdd(c(%#)x=*it&n446qli+!&d+z3p^##'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['voldemort.lifeafterking.org']
+ALLOWED_HOSTS = ['127.0.0.1', 'voldemort.lifeafterking.org']
 
 
 # Application definition
