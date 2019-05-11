@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'm_%pv)8g998a0w6-9kdd(c(%#)x=*it&n446qli+!&d+z3p^##'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'voldemort.lifeafterking.org']
+ALLOWED_HOSTS = ['127.0.0.1', 'todcalc.lifeafterking.org']
 
 
 # Application definition
