@@ -15,6 +15,26 @@ ul#id_percentage_change_relative_to {
     padding: 0;
     margin: 0;
 }
+.col_desc {
+    text-align: center;
+}
+.date_label {
+    font-weight: normal;
+    font-style: italic;
+    border-bottom: 1px solid black;
+}
+.amount_cell {
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+.total_cell_desc {
+    border-bottom: 1px solid black;
+    text-align: center;
+    vertical-align: bottom;
+}
+.amount_odd { background-color: LightCyan; }
+.amount_even { background-color: PaleTurquoise; }
 </style>
 </head>
 <body>
@@ -71,24 +91,29 @@ wish to double-check the previous.</p>
 <table>
 <tr>
     <th>&nbsp;</th>
-    {% for k, v in result.iteritems %}
-        <th>{{ v.date_str }}</th>
-    {% endfor %}
-    <th>Total</th>
+    <th colspan="{{ result|length }}" class="col_desc">Month/Year</th>
+    <th rowspan="2" class="total_cell_desc">Total</th>
 </tr>
 <tr>
-    <th>Switch to TOD + usage change:</th>
+    <th>&nbsp;</th>
     {% for k, v in result.iteritems %}
-        <td>${{ v.cost|floatformat:"2"|intcomma }}</th>
+        <th class="date_label">{{ v.date_str }}</th>
     {% endfor %}
-    <td>${{ sum_result|floatformat:"2"|intcomma }}</th>
 </tr>
 <tr>
-    <th>No changes made:</th>
+    <th>Switch to {{plan}} + reduce usage:</th>
+    {% for k, v in result.iteritems %}
+        <td class="amount_cell {% cycle 'amount_odd' 'amount_even' as cellcolors %}">${{ v.cost|floatformat:"2"|intcomma }}</th>
+    {% endfor %}
+    <td class="amount_cell {% cycle cellcolors %}">${{ sum_result|floatformat:"2"|intcomma }}</th>
+    {% resetcycle cellcolors %}
+</tr>
+<tr>
+    <th>Stay on current plan and keep usage the same:</th>
     {% for k, v in result_no_chg.iteritems %}
-        <td>${{ v.cost|floatformat:"2"|intcomma }}</th>
+        <td class="amount_cell {% cycle 'amount_even' 'amount_odd' as cellcolors %}">${{ v.cost|floatformat:"2"|intcomma }}</th>
     {% endfor %}
-    <td>${{ sum_result_no_chg|floatformat:"2"|intcomma }}</th>
+    <td class="amount_cell {% cycle cellcolors %}">${{ sum_result_no_chg|floatformat:"2"|intcomma }}</th>
 </tr>
 </table>
 

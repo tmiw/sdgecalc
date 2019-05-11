@@ -26,10 +26,12 @@ def index(request):
                 percentage_chg_per_all_hrs=0,
                 percentage_chg_per_peak_hr=0,
                 use_avg_usage=True)
+            plan = 'TOD-DR1' if form.cleaned_data['tod_plan'] == 'dr1' else 'TOD-DR2'
     else:
         form = TODCalcForm()
         result = {}
         result_no_chg = {}
+        plan = None
 
     result = collections.OrderedDict(sorted(result.items()))
     result_no_chg = collections.OrderedDict(sorted(result_no_chg.items()))
@@ -37,5 +39,6 @@ def index(request):
         'form': form, 
         'sum_result': sum([i[1].cost for i in result.iteritems()]), 
         'result': result, 
+        'plan': plan,
         'sum_result_no_chg': sum([i[1].cost for i in result_no_chg.iteritems()]),
         'result_no_chg': result_no_chg})
